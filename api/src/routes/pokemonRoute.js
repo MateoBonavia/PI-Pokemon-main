@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { getAllPokemons } = require("./pokemonFunctions");
-const { Pokemon, Type } = require("../db");
+const { Pokemon } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
       );
       result.length
         ? res.status(200).send(result)
-        : res.status(404).send("Pokemon not found by name");
+        : res.status(404).send("Pokemon name not found by");
     }
   } catch (error) {
     console.log(error);
@@ -31,7 +31,7 @@ router.get("/:id", async (req, res, next) => {
       let pokemonId = allPoke.filter((el) => el.id == id); // Filtro el id del pokemon pasado por parametro con los pokemones guardados en la api y en mi db.
       pokemonId.length
         ? res.status(200).send(pokemonId)
-        : res.status(404).send("Pokemon not found by id");
+        : res.status(404).send("Pokemon id not found");
     }
   } catch (error) {
     console.log(error);
