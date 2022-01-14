@@ -1,14 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const { getAllPokemons } = require("./pokemonFunctions");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
     const name = req.query.name;
     const allPoke = await getAllPokemons();
     if (!name) {
-      res.status(200).send(allPoke); //Si no se me paso un nombre, devuelvo todos los pokemones.
+      res.status(200).send(allPoke); // Si no se le paso un nombre, devuelvo todos los pokemones.
     } else {
       const result = allPoke.filter(
         (e) => e.name.toLowerCase().includes(name.toLowerCase()) // Filtro el nombre del pokemon pasado por query con los pokemones guardados en la api y en mi db.
@@ -45,8 +45,8 @@ router.post("/", async (req, res, next) => {
 
     let allPoke = await getAllPokemons();
 
-    let namePoke = allPoke.filter((e) =>
-      e.name.toLowerCase() === name.toLowerCase()
+    let namePoke = allPoke.filter(
+      (e) => e.name.toLowerCase() === name.toLowerCase()
     );
 
     if (!name) return res.status(400).send("Missing name");
@@ -64,6 +64,12 @@ router.post("/", async (req, res, next) => {
         weight,
         img,
       });
+
+      // let typeDb = await Type.findAll({
+      //   where: { name: type },
+      // });
+
+      // newPokemon.addTypes(typeDb);
 
       res
         .status(200)

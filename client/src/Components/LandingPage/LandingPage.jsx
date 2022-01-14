@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Fondo from "./homepage.png";
 import style from "./LandingPage.module.css";
 
 export default function homepage() {

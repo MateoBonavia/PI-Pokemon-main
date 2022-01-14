@@ -5,26 +5,25 @@ const axios = require("axios");
 //  Traer tipos desde la API.
 // --------------------------------------------------------------------------------------------------------
 
-
 const getTypes = async () => {
-    try {
-        const dbTypes = await Type.findAll({attributes: ['name', 'id']});
+  try {
+    const apiTypes = await axios.get("https://pokeapi.co/api/v2/type");
+    const data = apiTypes.data.results;
 
-        if (!dbTypes.length) {
-            const apiTypes = await axios.get('htps://pokeapi.co/api/v2/type');
+    data.forEach((e) => {
+      Type.findOrCreate({
+        where: {
+          name: e.name,
+        },
+      });
+    });
 
-            let types = apiTypes.data.results.map(e => {return {name: e.name}});
+    const typesDb = await Type.findAll();
 
-            Type.bulkCreate(types);
-
-            return types;
-        }
-
-        return dbTypes;
-        
-    } catch (error){
-        console.log(error);
-    };
+    return typesDb;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = { getTypes };

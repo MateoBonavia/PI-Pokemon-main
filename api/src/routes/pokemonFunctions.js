@@ -8,8 +8,11 @@ const axios = require("axios");
 const getPokeFromApi = async () => {
   try {
     const Api = await axios.get("https://pokeapi.co/api/v2/pokemon");
+    const ApiSec = await axios.get(Api.data.next);
     const resMap = Api.data.results.map((e) => axios.get(e.url));
-    const promise = await Promise.all(resMap).then((e) => {
+    const resMapSec = ApiSec.data.results.map((e) => axios.get(e.url));
+    const pokeConcat = resMap.concat(resMapSec);
+    const promise = await Promise.all(pokeConcat).then((e) => {
       let pokemon = e.map((e) => e.data);
       let arrPoke = [];
       pokemon.map((e) => {
@@ -67,6 +70,5 @@ const getAllPokemons = async () => {
   const info = api.concat(db);
   return info;
 };
-
 
 module.exports = { getAllPokemons };
