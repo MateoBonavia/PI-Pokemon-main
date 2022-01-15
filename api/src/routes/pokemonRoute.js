@@ -40,8 +40,18 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    let { name, hp, attack, defense, speed, height, weight, type, img } =
-      req.body;
+    let {
+      name,
+      hp,
+      attack,
+      defense,
+      speed,
+      height,
+      weight,
+      types,
+      img,
+      createInDb,
+    } = req.body;
 
     let allPoke = await getAllPokemons();
 
@@ -63,13 +73,14 @@ router.post("/", async (req, res, next) => {
         height,
         weight,
         img,
+        createInDb,
       });
 
-      // let typeDb = await Type.findAll({
-      //   where: { name: type },
-      // });
+      let typeDb = await Type.findAll({
+        where: { name: types },
+      });
 
-      // newPokemon.addTypes(typeDb);
+      newPokemon.addType(typeDb);
 
       res
         .status(200)

@@ -64,12 +64,13 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
-
       name: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {

@@ -1,19 +1,19 @@
 .numbers_container {
   display: inline-flex;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .button {
-  color: rgb(255, 239, 205);
+  color: rgb(73, 73, 73);
   padding: 10px;
   list-style: none;
   font-size: 25px;
   font-family: "Bebas Neue", cursive;
-  background: rgb(255, 176, 29);
+  background: rgb(254, 228, 104);
   background: radial-gradient(
     circle,
-    rgb(255, 168, 7) 0%,
-    rgb(238, 155, 0) 100%
+    rgba(254, 228, 104, 1) 0%,
+    rgba(247, 196, 48, 1) 100%
   );
   border-radius: 50px;
   margin: 20px;

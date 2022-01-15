@@ -25,7 +25,7 @@ const getPokeFromApi = async () => {
           speed: e.stats[5].base_stat,
           height: e.height,
           weight: e.weight,
-          type: e.types.map((e) => e.type.name),
+          types: e.types.map((e) => e.type.name),
           image: e.sprites.other.dream_world.front_default,
         });
       });
@@ -67,8 +67,13 @@ const getAllPokemons = async () => {
   const api = await getPokeFromApi();
   const db = await getPokeFromDb();
 
-  const info = api.concat(db);
-  return info;
+  if (db.length > 0) {
+    const info = api.concat(db);
+    return info;
+  } else {
+    const info = api;
+    return info;
+  }
 };
 
 module.exports = { getAllPokemons };
