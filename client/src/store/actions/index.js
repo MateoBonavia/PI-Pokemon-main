@@ -30,6 +30,20 @@ export function getPokemonByName(search) {
   };
 }
 
+export function getPokemonById(id) {
+  return async function (dispatch) {
+    try {
+      return await axios
+        .get(`http://localhost:3001/api/pokemon/${id}`)
+        .then((res) => {
+          dispatch({ type: "GET_POKEMON_BY_ID", payload: res.data });
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+}
+
 export function postPokemon(payload) {
   try {
     return async function (dispatch) {
@@ -56,4 +70,25 @@ export function getTypes() {
   } catch (e) {
     console.log(e);
   }
+}
+
+export function filterCreated(payload) {
+  return {
+    type: "FILTER_CREATED",
+    payload,
+  };
+}
+
+export function filterType(payload) {
+  return {
+    type: "FILTER_TYPE",
+    payload,
+  };
+}
+
+export function orderName(payload) {
+  return {
+    type: "ORDER_NAME",
+    payload,
+  };
 }

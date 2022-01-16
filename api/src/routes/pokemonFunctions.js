@@ -67,13 +67,8 @@ const getAllPokemons = async () => {
   const api = await getPokeFromApi();
   const db = await getPokeFromDb();
 
-  if (db.length > 0) {
-    const info = api.concat(db);
-    return info;
-  } else {
-    const info = api;
-    return info;
-  }
+  const info = api.concat(db);
+  return info;
 };
 
 module.exports = { getAllPokemons };

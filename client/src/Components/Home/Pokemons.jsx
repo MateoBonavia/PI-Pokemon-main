@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllPokemons } from "../../store/actions/index";
-// import { Link } from "react-router-dom";
-import Pokemon from "../Card/Pokemon";
+import { Link } from "react-router-dom";
+import Pokemon from "../Cards/Pokemon";
 import style from "./Pokemons.module.css";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../navBar/navBar";
@@ -41,13 +41,15 @@ function Pokemons() {
           return (
             <div>
               <div className={style.card}>
-                <Pokemon
-                  key={Math.random()}
-                  name={p.name}
-                  image={p.image}
-                  types={p.types}
-                  createInDb={p.createInDb}
-                />
+                <Link to={`/pokemon/${p.id}`}>
+                  <Pokemon
+                    key={Math.random()}
+                    name={p.name}
+                    image={p.image}
+                    types={p.types}
+                    createInDb={p.createInDb}
+                  />
+                </Link>
               </div>
             </div>
           );
