@@ -5,6 +5,7 @@ import { getPokemonById } from "../../store/actions";
 import { useEffect } from "react";
 import style from "./card.module.css";
 import NavBar from "../navBar/navBar";
+import Loading from "../Loading/Loading";
 
 export default function Card(props) {
   const dispatch = useDispatch();
@@ -14,31 +15,41 @@ export default function Card(props) {
   }, [dispatch]);
 
   const pokemon = useSelector((state) => state.details);
+  console.log(pokemon);
+  console.log(pokemon.types);
 
-  return (
-    <div>
-      <NavBar />
-      {pokemon.length > 0 ? (
-        <div className={style.container}>
-          <h1 className={style.name}>{pokemon[0].name}</h1>
-          <img
-            src={pokemon[0].image ? pokemon[0].image : pokemon[0].img}
-            alt=""
-            className={style.img}
-          />
-          <h3 className={style.type}>{pokemon[0].types}</h3>
-          <h4 className={style.info}>Hp {pokemon[0].hp}</h4>
-          <h4 className={style.info}>Attack {pokemon[0].attack}</h4>
-          <h4 className={style.info}>Defense {pokemon[0].defense}</h4>
-          <h4 className={style.info}>Speed {pokemon[0].speed}</h4>
-          <h4 className={style.info}>Height {pokemon[0].height}</h4>
-          <h4 className={style.info}>Weight {pokemon[0].weight}</h4>
+  if (pokemon) {
+    const pokeDet = () => {
+      return (
+        <div className={style.containerGeneral}>
+          <NavBar />
+          <div className={style.container}>
+            <h1 className={style.name}>{pokemon.name}</h1>
+            <img
+              src={pokemon.image ? pokemon.image : pokemon.img}
+              alt=""
+              className={style.img}
+            />
+            <div className={style.types}>
+              {pokemon.types.map((e) => (
+                <p>{e}</p>
+              ))}
+            </div>
+            <div className={style.infoContainer}>
+              <h4 className={style.info}>Hp {pokemon.hp}</h4>
+              <h4 className={style.info}>Attack {pokemon.attack}</h4>
+              <h4 className={style.info}>Defense {pokemon.defense}</h4>
+              <h4 className={style.info}>Speed {pokemon.speed}</h4>
+              <h4 className={style.info}>Height {pokemon.height}</h4>
+              <h4 className={style.info}>Weight {pokemon.weight}</h4>
+            </div>
+            <Link to="/home" className={style.back}>
+              GO BACK
+            </Link>
+          </div>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-
-      <Link to="/home">GO BACK</Link>
-    </div>
-  );
+      );
+    };
+    return pokemon.name ? pokeDet() : <Loading />;
+  }
 }

@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 import style from "./filters.module.css";
 import { getTypes } from "../../store/actions";
 import { useEffect } from "react";
-import { filterType, filterCreated, orderName } from "../../store/actions";
+import {
+  filterType,
+  filterCreated,
+  orderName,
+  orderStrength,
+} from "../../store/actions";
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -25,20 +30,25 @@ export default function Filters() {
     dispatch(filterCreated(e.target.value));
   }
 
-  function handleSort(e) {
+  function handleSortName(e) {
     e.preventDefault();
     dispatch(orderName(e.target.value));
   }
 
+  function handleSortStength(e) {
+    e.preventDefault();
+    dispatch(orderStrength(e.target.value));
+  }
+
   return (
     <div className={style.filtersContainer}>
-      <select onChange={(e) => handleSort(e)}>
+      <select onChange={(e) => handleSortName(e)} className={style.select}>
         <option value="def">Default</option>
         <option value="asc">Ascending A-Z</option>
         <option value="desc">Descending Z-A</option>
       </select>
 
-      <select onChange={(e) => handleFilterType(e)}>
+      <select onChange={(e) => handleFilterType(e)} className={style.select}>
         <option value="All">Filter Type</option>
         {types.map((t, i) => {
           return (
@@ -49,13 +59,13 @@ export default function Filters() {
         })}
       </select>
 
-      <select>
-        <option>Strength</option>
+      <select className={style.select} onChange={(e) => handleSortStength(e)}>
+        <option value="def">Strength</option>
         <option value="high">High strength</option>
         <option value="low">Low strength</option>
       </select>
 
-      <select onChange={(e) => handleFilterCreated(e)}>
+      <select onChange={(e) => handleFilterCreated(e)} className={style.select}>
         <option value="All">All</option>
         <option value="pokedex">Pokedex</option>
         <option value="created">Created</option>

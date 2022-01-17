@@ -92,3 +92,10 @@ export function orderName(payload) {
     payload,
   };
 }
+
+export function orderStrength(payload) {
+  return {
+    type: "ORDER_STENGTH",
+    payload,
+  };
+}

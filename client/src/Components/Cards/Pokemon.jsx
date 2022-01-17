@@ -2,7 +2,6 @@ import React from "react";
 import style from "./Pokemons.module.css";
 
 function Pokemon({ name, image, types, createInDb }) {
-
   let tipoDb = createInDb
     ? types.map((e) => {
         const nameType = e.name;

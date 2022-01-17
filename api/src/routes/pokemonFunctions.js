@@ -60,6 +60,109 @@ const getPokeFromDb = async () => {
 };
 
 // --------------------------------------------------------------------------------------------------------
+//  Buscar pokemon por id.
+// --------------------------------------------------------------------------------------------------------
+
+const findPokeById = async (id) => {
+  console.log(id);
+  try {
+    if (id.length < 5) {
+      let poke = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+      let pokemon = {
+        id: poke.data.id,
+        img: poke.data.sprites.other.dream_world.front_default,
+        name: poke.data.name,
+        types: poke.data.types.map((t) => t.type.name),
+        hp: poke.data.stats[0].base_stat,
+        attack: poke.data.stats[1].base_stat,
+        defense: poke.data.stats[2].base_stat,
+        speed: poke.data.stats[5].base_stat,
+        height: poke.data.height,
+        weight: poke.data.weight,
+      };
+      return pokemon;
+    } else {
+      let poke = await Pokemon.findByPk(id, { include: { model: Type } });
+
+      let pokemon = {
+        id: poke.id,
+        img: "https://img.search.brave.com/DgXhYLiK-dmzv7iCMP20jz0Q5UFOhY5KVdM6_bT27f8/fit/256/228/ce/1/aHR0cHM6Ly82NC5t/ZWRpYS50dW1ibHIu/Y29tLzcwOGQ0NWYw/ZGZmOGM2MjhmOWI1/OWI3ZWYwYjU2Yjdm/L3R1bWJscl9pbmxp/bmVfb2l5YXR1dTZk/dzF1MGF4eDdfNTQw/LmdpZnY",
+        name: poke.name,
+        types: poke.types.map((t) => t.name),
+        hp: poke.hp,
+        attack: poke.attack,
+        defense: poke.defense,
+        speed: poke.speed,
+        height: poke.height,
+        weight: poke.weight,
+      };
+
+      return pokemon;
+    }
+  } catch (e) {
+    return "Pokemon not found";
+  }
+};
+
+// --------------------------------------------------------------------------------------------------------
+//  Buscar pokemon por name API.
+// --------------------------------------------------------------------------------------------------------
+
+const getPokeByNameApi = async (name) => {
+  name = name.toLowerCase();
+  try {
+    const poke = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+
+    const pokeInfo = {
+      id: poke.data.id,
+      img: poke.data.sprites.other.dream_world.front_default,
+      name: poke.data.name,
+      types: poke.data.types.map((t) => t.type.name),
+      hp: poke.data.stats[0].base_stat,
+      attack: poke.data.stats[1].base_stat,
+      defense: poke.data.stats[2].base_stat,
+      speed: poke.data.stats[5].base_stat,
+      height: poke.data.height,
+      weight: poke.data.weight,
+    };
+
+    return pokeInfo;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// --------------------------------------------------------------------------------------------------------
+//  Buscar pokemon por name DB.
+// --------------------------------------------------------------------------------------------------------
+
+const getPokeByNameDb = async (name) => {
+  name = name.toLowerCase();
+  try {
+    const poke = await Pokemon.findOne({
+      whee: {
+        name: name,
+      },
+      attributes: [
+        "name",
+        "hp",
+        "attack",
+        "defense",
+        "speed",
+        "height",
+        "weight",
+        "img",
+        "createInDb",
+      ],
+    });
+    return poke;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// --------------------------------------------------------------------------------------------------------
 //  Juntamos todos los pokemones.
 // --------------------------------------------------------------------------------------------------------
 
@@ -71,4 +174,9 @@ const getAllPokemons = async () => {
   return info;
 };
 
-module.exports = { getAllPokemons };
+module.exports = {
+  getAllPokemons,
+  findPokeById,
+  getPokeByNameApi,
+  getPokeByNameDb,
+};

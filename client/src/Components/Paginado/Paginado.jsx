@@ -9,11 +9,17 @@ export default function Paginado({ pokemonsPerPage, allPokemon, paginado }) {
   }
 
   return (
-    <div>
+    <div className={style.generalContainer}>
       {pageNumbers &&
         pageNumbers.map((n) => (
           <div className={style.numbers_container}>
-            <button onClick={() => paginado(n)} key={n} className = {style.button}>{n}</button>
+            <button
+              onClick={() => paginado(n)}
+              key={n}
+              className={style.button}
+            >
+              {n}
+            </button>
           </div>
         ))}
     </div>

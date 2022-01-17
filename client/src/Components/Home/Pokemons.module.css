@@ -3,7 +3,23 @@
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, 1fr);
   margin: 10px;
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-left: -100px;
 }
 
+.filtersContainer {
+  position: absolute;
+  top: 20px;
+  left: 350px;
+}
 
+.select {
+  margin-right: 40px;
+  margin-top: 0px;
+  height: 30px;
+  width: 180px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}

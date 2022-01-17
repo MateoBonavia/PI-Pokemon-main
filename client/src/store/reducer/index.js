@@ -2,7 +2,7 @@ const initialState = {
   pokemons: [],
   allPokemons: [],
   types: [],
-  details: [],
+  details: {},
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -26,7 +26,7 @@ export default function rootReducer(state = initialState, action) {
         details: action.payload,
       };
 
-    case "POST_CHARACTER":
+    case "POST_POKEMON":
       return {
         ...state,
       };
@@ -62,17 +62,53 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case "ORDER_NAME":
-      let sortedArr =
+      const sortName =
         action.payload === "asc"
-          ? state.pokemons.sort((a, b) => {
-              return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+          ? state.pokemons.sort(function (a, b) {
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (b.name > a.name) {
+                return -1;
+              }
+              return 0;
             })
-          : state.pokemons.sort((a, b) => {
-              return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
+          : state.pokemons.sort(function (a, b) {
+              if (a.name > b.name) {
+                return -1;
+              }
+              if (b.name > a.name) {
+                return 1;
+              }
             });
       return {
         ...state,
-        pokemons: action.payload === "def" ? state.allPokemons : sortedArr,
+        pokemons: action.payload === "def" ? state.allPokemons : sortName,
+      };
+
+    case "ORDER_STENGTH":
+      const sortStrength =
+        action.payload === "low"
+          ? state.pokemons.sort(function (a, b) {
+              if (a.attack > b.attack) {
+                return 1;
+              }
+              if (b.attack > a.attack) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.pokemons.sort(function (a, b) {
+              if (a.attack > b.attack) {
+                return -1;
+              }
+              if (b.attack > a.attack) {
+                return 1;
+              }
+            });
+      return {
+        ...state,
+        pokemons: action.payload === "def" ? state.allPokemons : sortStrength,
       };
 
     default:

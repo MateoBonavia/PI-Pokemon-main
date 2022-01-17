@@ -1,6 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-const { getAllPokemons } = require("./pokemonFunctions");
+const {
+  getAllPokemons,
+  findPokeById,
+  getPokeByNameApi,
+  getPokeByNameDb,
+} = require("./pokemonFunctions");
 const { Pokemon, Type } = require("../db");
 
 router.get("/", async (req, res, next) => {
@@ -8,14 +13,14 @@ router.get("/", async (req, res, next) => {
     const name = req.query.name;
     const allPoke = await getAllPokemons();
     if (!name) {
-      res.status(200).send(allPoke); // Si no se le paso un nombre, devuelvo todos los pokemones.
+      res.status(200).send(allPoke);
     } else {
-      const result = allPoke.filter(
-        (e) => e.name.toLowerCase().includes(name.toLowerCase()) // Filtro el nombre del pokemon pasado por query con los pokemones guardados en la api y en mi db.
-      );
-      result.length
-        ? res.status(200).send(result)
-        : res.status(404).send("Pokemon name not found by");
+      let apiInfo = await getPokeByNameApi(name);
+      let dbInfo = await getPokeByNameDb(name);
+
+      if (apiInfo !== "undefined") return res.send(apiInfo);
+      if (dbInfo !== "undefined") return res.send(dbInfo);
+      return res.send("Pokemon not found");
     }
   } catch (error) {
     console.log(error);
@@ -23,16 +28,10 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
   try {
-    const id = req.params.id;
-    const allPoke = await getAllPokemons();
-
-    if (id) {
-      let pokemonId = allPoke.filter((el) => el.id == id); // Filtro el id del pokemon pasado por parametro con los pokemones guardados en la api y en mi db.
-      pokemonId.length
-        ? res.status(200).send(pokemonId)
-        : res.status(404).send("Pokemon id not found");
-    }
+    let poke = await findPokeById(id);
+    res.send(poke);
   } catch (error) {
     console.log(error);
   }
