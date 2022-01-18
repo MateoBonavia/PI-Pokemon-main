@@ -11,6 +11,8 @@ export default function CreatePokemon() {
   const selectType = useSelector((state) => state.types);
   const [error, setError] = useState({});
 
+  const [handleTypes, setHandleTypes] = useState([]);
+
   const [input, setInput] = useState({
     name: "",
     hp: "",
@@ -20,7 +22,7 @@ export default function CreatePokemon() {
     height: "",
     weight: "",
     types: [],
-    img: "",
+    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
   });
 
   const resetState = () => {
@@ -47,7 +49,7 @@ export default function CreatePokemon() {
 
   const validate = () => {
     let errors = {};
-    if (!validateName.test(input.name)) {
+    if (!validateName.test(input.name) || !input.name) {
       errors.name = "Name required and must be letters";
     }
     if (!validateUrl.test(input.img)) {
@@ -66,11 +68,11 @@ export default function CreatePokemon() {
     }
     if (
       !validateNum.test(input.defense) ||
-      input.defense < 0 ||
+      input.defense < 10 ||
       input.defense > 100
     ) {
       errors.defense =
-        "Defense is require and must be a number between 0 and 100";
+        "Defense is require and must be a number between 10 and 100";
     }
     if (
       !validateNum.test(input.speed) ||
@@ -113,21 +115,21 @@ export default function CreatePokemon() {
   }
 
   function handleSelect(e) {
-    setInput({
-      ...input,
-      types: [...input.types, e.target.value],
-    });
-  }
-
-  function handleDelete(e) {
-    setInput({
-      ...input,
-      types: input.types.filter((t) => t !== e),
-    });
+    if (handleTypes.find((x) => x === e.target.value)) {
+      setInput({
+        ...input,
+        types: !input.types.includes(e.target.value)
+          ? [...input.types, e.target.value]
+          : input.types,
+      });
+      setHandleTypes(handleTypes.filter((x) => x !== e.target.value));
+    } else {
+      if (handleTypes.length === 2) return;
+      setHandleTypes([...handleTypes, e.target.value]);
+    }
   }
 
   function handleSubmitPost(e) {
-    console.log(error);
     e.preventDefault();
     if (
       !error.name &&
@@ -135,13 +137,26 @@ export default function CreatePokemon() {
       !error.attack &&
       !error.defense &&
       !error.speed &&
-      !error.heightt &&
+      !error.height &&
       !error.weight &&
       !error.types
     ) {
-      dispatch(postPokemon(input));
-      resetState();
-      alert("Pokemon successfully created ");
+      if (
+        input.name.length !== 0 &&
+        input.hp.length !== 0 &&
+        input.attack.length !== 0
+      ) {
+        setInput({
+          ...input,
+          types: handleTypes.map((e) => input.types.push(e)),
+        });
+        console.log(input);
+        dispatch(postPokemon(input));
+        resetState();
+        alert("Pokemon successfully created ");
+      } else {
+        alert("The form is required");
+      }
     } else {
       alert("The form is required");
     }
@@ -168,9 +183,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : (
-            <span className={style.errorName}>{error.name}</span>
-          )}
+          {!error ? null : <p className={style.errorName}>{error.name}</p>}
         </div>
 
         <div className={style.inputLabel}>
@@ -183,7 +196,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : <span className={style.errorHp}>{error.hp}</span>}
+          {!error ? null : <p className={style.errorHp}>{error.hp}</p>}
         </div>
 
         <div className={style.inputLabel}>
@@ -196,9 +209,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : (
-            <span className={style.errorAttack}>{error.attack}</span>
-          )}
+          {!error ? null : <p className={style.errorAttack}>{error.attack}</p>}
         </div>
 
         <div className={style.inputLabel}>
@@ -212,7 +223,7 @@ export default function CreatePokemon() {
             className={style.input}
           />
           {!error ? null : (
-            <span className={style.errorDefense}>{error.defense}</span>
+            <p className={style.errorDefense}>{error.defense}</p>
           )}
         </div>
 
@@ -226,9 +237,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : (
-            <span className={style.errorSpeed}>{error.speed}</span>
-          )}
+          {!error ? null : <p className={style.errorSpeed}>{error.speed}</p>}
         </div>
 
         <div className={style.inputLabel}>
@@ -241,9 +250,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : (
-            <span className={style.errorHeight}>{error.height}</span>
-          )}
+          {!error ? null : <p className={style.errorHeight}>{error.height}</p>}
         </div>
 
         <div className={style.inputLabel}>
@@ -256,12 +263,10 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-          {!error ? null : (
-            <span className={style.errorWeight}>{error.weight}</span>
-          )}
+          {!error ? null : <p className={style.errorWeight}>{error.weight}</p>}
         </div>
 
-        <div className={style.inputLabel}>
+        {/* <div className={style.inputLabel}>
           <label className={style.label}>Image:</label>
           <input
             key="image"
@@ -271,11 +276,15 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-        </div>
+        </div> */}
 
         <div className={style.selectTypes}>
           <label className={style.selectTypes__text}>Choose the Type</label>
-          <select name="types" onChange={(e) => handleSelect(e)}>
+          <select
+            name="types"
+            onChange={(e) => handleSelect(e)}
+            className={style.selectType}
+          >
             {selectType.map((t, i) => {
               return (
                 <option value={t.name} key={i}>
@@ -284,14 +293,11 @@ export default function CreatePokemon() {
               );
             })}
           </select>
-          {input.types.map((e, i) => {
+          {!error ? null : <p className={style.errorT}>{error.types}</p>}
+          {handleTypes.map((e, i) => {
             return (
               <div key={i}>
-                <button
-                  type="button"
-                  className="EliminateType"
-                  onClick={() => handleDelete(e)}
-                >
+                <button type="button" onClick={() => handleChange(e)}>
                   X
                 </button>
                 <span>{e}</span>

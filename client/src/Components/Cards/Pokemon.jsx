@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Pokemons.module.css";
 
-function Pokemon({ name, image, types, createInDb }) {
+function Pokemon({ name, img, types, createInDb }) {
   let tipoDb = createInDb
     ? types.map((e) => {
         const nameType = e.name;
@@ -13,7 +13,7 @@ function Pokemon({ name, image, types, createInDb }) {
 
   return (
     <div className={style.pokemon}>
-      <img src={image} alt={`Pokemon ${name}`} className={style.img} />
+      <img src={img} alt={`Pokemon ${name}`} className={style.img} />
       <div className={style.info}>
         <h1 className={style.name}>{name}</h1>
       </div>

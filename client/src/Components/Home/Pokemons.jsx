@@ -134,7 +134,7 @@ function Pokemons() {
                     <Pokemon
                       key={Math.random()}
                       name={p.name}
-                      image={p.image}
+                      img={p.image}
                       types={p.types}
                       createInDb={p.createInDb}
                     />

@@ -27,8 +27,7 @@
   height: 20px;
 }
 
-.style.selectTypes__text {
-  align-self: center;
+.selectTypes__text {
   font-size: 20px;
 }
 
@@ -56,6 +55,11 @@
 
 .goBack:hover {
   transform: scale(1.1);
+  background: radial-gradient(
+    circle,
+    rgba(201, 28, 94, 1) 0%,
+    rgba(190, 25, 117, 1) 100%
+  );
 }
 
 .buttonCreate {
@@ -80,32 +84,42 @@
   transform: scale(1.1);
 }
 
+.selectType {
+  height: 30px;
+  width: 100px;
+  margin-left: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
 .errorName {
   color: red;
   position: absolute;
   right: 550px;
-  top: 213px;
+  top: 197px;
 }
 
 .errorHp {
   color: red;
   position: absolute;
   right: 450px;
-  top: 250px;
+  top: 234px;
 }
 
 .errorAttack {
   color: red;
   position: absolute;
-  right: 420px;
-  top: 288px;
+  right: 421px;
+  top: 273px;
 }
 
-.errorDefense {   /* NO FUNCIONA */
+.errorDefense {
   color: red;
   position: absolute;
-  right: 570px;
-  top: 320px;
+  right: 414px;
+  top: 325px;
 }
 
 .errorSpeed {
