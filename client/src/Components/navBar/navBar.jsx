@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GetAllPokemons } from "../../store/actions/index";
 import { Link } from "react-router-dom";
@@ -13,10 +12,6 @@ export default function NavBar() {
     e.preventDefault();
     dispatch(GetAllPokemons());
   }
-
-  useEffect(() => {
-    dispatch(GetAllPokemons());
-  }, [dispatch]);
 
   return (
     <div className={style.contenedor}>

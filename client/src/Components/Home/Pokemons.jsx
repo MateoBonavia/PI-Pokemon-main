@@ -13,29 +13,30 @@ import {
   filterCreated,
   orderName,
   orderStrength,
-} from "../../store/actions";
+} from "../../store/actions/index";
 
 function Pokemons() {
   let dispatch = useDispatch();
 
   const types = useSelector((state) => state.types);
 
-  const allPokemon = useSelector((state) => state.pokemons);
+  useEffect(() => {
+    dispatch(GetAllPokemons());
+    dispatch(getTypes());
+  }, [dispatch]);
+
+  const pokemons = useSelector((state) => state.pokemons);
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
   const lastPoke = currentPage * pokemonsPerPage;
   const firstPoke = lastPoke - pokemonsPerPage;
-  const currentPoke = allPokemon.slice(firstPoke, lastPoke);
+  const currentPoke = pokemons.slice(firstPoke, lastPoke);
+  console.log(currentPoke);
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
     setPokemonsPerPage(12);
   };
-
-  useEffect(() => {
-    dispatch(GetAllPokemons());
-    dispatch(getTypes());
-  }, [dispatch]);
 
   // -----------------------------------------------------------------------------------------------------------------------------------
   // Handlers para los filtros.
@@ -70,7 +71,7 @@ function Pokemons() {
 
   // -----------------------------------------------------------------------------------------------------------------------------------
 
-  if (allPokemon.length < 1) {
+  if (pokemons.length < 1) {
     return <Loading />;
   } else {
     return (
@@ -123,7 +124,7 @@ function Pokemons() {
 
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
-          allPokemon={allPokemon.length}
+          pokemons={pokemons.length}
           paginado={paginado}
         />
         <div className={style.container_pokes}>

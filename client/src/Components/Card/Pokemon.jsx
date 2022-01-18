@@ -25,11 +25,7 @@ export default function Card(props) {
           <NavBar />
           <div className={style.container}>
             <h1 className={style.name}>{pokemon.name}</h1>
-            <img
-              src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png"
-              alt=""
-              className={style.img}
-            />
+            <img src={pokemon.image} alt="" className={style.img} />
             <div className={style.types}>
               {pokemon.types.map((e) => (
                 <p>{e}</p>

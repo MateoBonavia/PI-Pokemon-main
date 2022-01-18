@@ -17,7 +17,7 @@ export default function rootReducer(state = initialState, action) {
     case "GET_POKEMON_BY_NAME":
       return {
         ...state,
-        pokemons: action.payload,
+        pokemons: [action.payload],
       };
 
     case "GET_POKEMON_BY_ID":

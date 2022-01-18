@@ -9,13 +9,16 @@ export default function SearchBar() {
   const [name, setName] = useState("");
 
   function handleInputChange(e) {
-    e.preventDefault();
+    console.log("entre");
     setName(e.target.value);
   }
 
   function handleSubmit(e) {
+    console.log("entre");
     e.preventDefault();
     dispatch(getPokemonByName(name));
+    console.log("dispatch");
+    setName("");
   }
 
   return (
