@@ -22,7 +22,7 @@ export default function CreatePokemon() {
     height: "",
     weight: "",
     types: [],
-    img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+    image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
   });
 
   const resetState = () => {
@@ -35,7 +35,7 @@ export default function CreatePokemon() {
       height: "",
       weight: "",
       types: [],
-      img: "",
+      image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
     });
   };
 
@@ -55,47 +55,57 @@ export default function CreatePokemon() {
     if (!validateUrl.test(input.img)) {
       errors.img = "URL required";
     }
-    if (!validateNum.test(input.hp) || input.hp < 1 || input.hp > 300) {
+    if (
+      !validateNum.test(input.hp) ||
+      input.hp < 1 ||
+      input.hp > 300 ||
+      !input.hp.length
+    ) {
       errors.hp = "HP is require and must be a number between 0 and 300";
     }
     if (
       !validateNum.test(input.attack) ||
-      input.attack < 10 ||
-      input.attack > 500
+      input.attack < 1 ||
+      input.attack > 500 ||
+      !input.attack.length
     ) {
       errors.attack =
-        "Attack is require and must be a number between 10 and 500";
+        "Attack is require and must be a number between 1 and 500";
     }
     if (
       !validateNum.test(input.defense) ||
-      input.defense < 10 ||
-      input.defense > 100
+      input.defense < 1 ||
+      input.defense > 100 ||
+      !input.defense.length
     ) {
       errors.defense =
-        "Defense is require and must be a number between 10 and 100";
+        "Defense is require and must be a number between 1 and 100";
     }
     if (
       !validateNum.test(input.speed) ||
-      input.speed < 10 ||
-      input.speed > 500
+      input.speed < 1 ||
+      input.speed > 500 ||
+      !input.speed.length
     ) {
-      errors.speed = "Speed is require and must be a number between 10 and 500";
+      errors.speed = "Speed is require and must be a number between 1 and 500";
     }
     if (
       !validateNum.test(input.height) ||
-      input.height < 10 ||
-      input.height > 300
+      input.height < 1 ||
+      input.height > 300 ||
+      !input.height.length
     ) {
       errors.height =
-        "Height is require and must be a number between 10 and 300";
+        "Height is require and must be a number between 1 and 300";
     }
     if (
       !validateNum.test(input.weight) ||
-      input.weight < 10 ||
-      input.weight > 100
+      input.weight < 1 ||
+      input.weight > 100 ||
+      !input.weight.length
     ) {
       errors.weight =
-        "Weight is require and must be a number between 10 and 100";
+        "Weight is require and must be a number between 1 and 100";
     }
 
     return errors;
@@ -150,7 +160,7 @@ export default function CreatePokemon() {
           ...input,
           types: handleTypes.map((e) => input.types.push(e)),
         });
-        console.log(input);
+        console.log(input.image);
         dispatch(postPokemon(input));
         resetState();
         alert("Pokemon successfully created ");
@@ -297,7 +307,7 @@ export default function CreatePokemon() {
           {handleTypes.map((e, i) => {
             return (
               <div key={i}>
-                <button type="button" onClick={() => handleChange(e)}>
+                <button type="button" onClick={(e) => handleChange(e)}>
                   X
                 </button>
                 <span>{e}</span>

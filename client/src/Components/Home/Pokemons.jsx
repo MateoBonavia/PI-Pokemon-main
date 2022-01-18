@@ -58,6 +58,7 @@ function Pokemons() {
     dispatch(orderName(e.target.value));
     setCurrentPage(1);
     setOrder(`order ${e.target.value}`);
+    order();
   }
 
   function handleSortStength(e) {
@@ -132,9 +133,9 @@ function Pokemons() {
                 <div className={style.card}>
                   <Link to={`/pokemon/${p.id}`}>
                     <Pokemon
-                      key={Math.random()}
+                      key={i}
                       name={p.name}
-                      img={p.image}
+                      img={p.image ? p.image : p.img}
                       types={p.types}
                       createInDb={p.createInDb}
                     />

@@ -71,7 +71,7 @@ const findPokeById = async (id) => {
 
       let pokemon = {
         id: poke.data.id,
-        img: poke.data.sprites.other.dream_world.front_default,
+        image: poke.data.sprites.other.dream_world.front_default,
         name: poke.data.name,
         types: poke.data.types.map((t) => t.type.name),
         hp: poke.data.stats[0].base_stat,
@@ -87,7 +87,7 @@ const findPokeById = async (id) => {
 
       let pokemon = {
         id: poke.id,
-        img: "https://img.search.brave.com/DgXhYLiK-dmzv7iCMP20jz0Q5UFOhY5KVdM6_bT27f8/fit/256/228/ce/1/aHR0cHM6Ly82NC5t/ZWRpYS50dW1ibHIu/Y29tLzcwOGQ0NWYw/ZGZmOGM2MjhmOWI1/OWI3ZWYwYjU2Yjdm/L3R1bWJscl9pbmxp/bmVfb2l5YXR1dTZk/dzF1MGF4eDdfNTQw/LmdpZnY",
+        image: "",
         name: poke.name,
         types: poke.types.map((t) => t.name),
         hp: poke.hp,
@@ -116,7 +116,7 @@ const getPokeByNameApi = async (name) => {
 
     const pokeInfo = {
       id: poke.data.id,
-      img: poke.data.sprites.other.dream_world.front_default,
+      image: poke.data.sprites.other.dream_world.front_default,
       name: poke.data.name,
       types: poke.data.types.map((t) => t.type.name),
       hp: poke.data.stats[0].base_stat,
@@ -152,7 +152,7 @@ const getPokeByNameDb = async (name) => {
         "speed",
         "height",
         "weight",
-        "img",
+        "image",
         "createInDb",
       ],
     });

@@ -12,7 +12,7 @@ export default function Card(props) {
 
   useEffect(() => {
     dispatch(getPokemonById(props.match.params.id));
-  }, [dispatch]);
+  }, [dispatch, props]);
 
   const pokemon = useSelector((state) => state.details);
   console.log(pokemon);
@@ -26,7 +26,7 @@ export default function Card(props) {
           <div className={style.container}>
             <h1 className={style.name}>{pokemon.name}</h1>
             <img
-              src={pokemon.image ? pokemon.image : pokemon.img}
+              src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png"
               alt=""
               className={style.img}
             />

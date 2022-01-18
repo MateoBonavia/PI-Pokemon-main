@@ -3,12 +3,12 @@ import style from "./Pokemons.module.css";
 
 function Pokemon({ name, img, types, createInDb }) {
   let tipoDb = createInDb
-    ? types.map((e) => {
+    ? types.map((e, i) => {
         const nameType = e.name;
-        return <h5>{nameType}</h5>;
+        return <h5 key={i}>{nameType}</h5>;
       })
-    : types.map((e) => {
-        return <h5>{e}</h5>;
+    : types.map((e, i) => {
+        return <h5 key={i}>{e}</h5>;
       });
 
   return (

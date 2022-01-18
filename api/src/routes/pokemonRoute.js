@@ -48,9 +48,11 @@ router.post("/", async (req, res, next) => {
       height,
       weight,
       types,
-      img,
+      image,
       createInDb,
     } = req.body;
+
+    console.log(image);
 
     let allPoke = await getAllPokemons();
 
@@ -71,7 +73,7 @@ router.post("/", async (req, res, next) => {
         speed,
         height,
         weight,
-        img,
+        image,
         createInDb,
       });
 

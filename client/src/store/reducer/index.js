@@ -80,6 +80,7 @@ export default function rootReducer(state = initialState, action) {
               if (b.name > a.name) {
                 return 1;
               }
+              return 0;
             });
       return {
         ...state,
@@ -105,6 +106,7 @@ export default function rootReducer(state = initialState, action) {
               if (b.attack > a.attack) {
                 return 1;
               }
+              return 0;
             });
       return {
         ...state,

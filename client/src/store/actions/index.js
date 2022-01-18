@@ -45,7 +45,6 @@ export function getPokemonById(id) {
 }
 
 export function postPokemon(payload) {
-  try {
     return async function (dispatch) {
       const res = await axios.post(
         "http://localhost:3001/api/pokemon",
@@ -53,13 +52,9 @@ export function postPokemon(payload) {
       );
       return res;
     };
-  } catch (e) {
-    console.log(e);
-  }
 }
 
 export function getTypes() {
-  try {
     return async function (dispatch) {
       let info = await axios.get("http://localhost:3001/api/type");
       dispatch({
@@ -67,9 +62,6 @@ export function getTypes() {
         payload: info.data,
       });
     };
-  } catch (e) {
-    console.log(e);
-  }
 }
 
 export function filterCreated(payload) {

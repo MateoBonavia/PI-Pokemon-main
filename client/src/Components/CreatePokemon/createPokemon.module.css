@@ -97,48 +97,55 @@
 .errorName {
   color: red;
   position: absolute;
-  right: 550px;
+  right: 512px;
   top: 197px;
+  letter-spacing: 1px;
 }
 
 .errorHp {
   color: red;
   position: absolute;
-  right: 450px;
+  right: 393px;
   top: 234px;
+  letter-spacing: 1px;
 }
 
 .errorAttack {
   color: red;
   position: absolute;
-  right: 421px;
-  top: 273px;
+  right: 366px;
+  top: 272px;
+  letter-spacing: 1px;
 }
 
 .errorDefense {
   color: red;
   position: absolute;
-  right: 414px;
-  top: 325px;
+  right: 358px;
+  top: 309px;
+  letter-spacing: 1px;
 }
 
 .errorSpeed {
   color: red;
   position: absolute;
-  right: 425px;
-  top: 363px;
+  right: 371px;
+  top: 347px;
+  letter-spacing: 1px;
 }
 
 .errorHeight {
   color: red;
   position: absolute;
-  right: 422px;
-  top: 400px;
+  right: 367px;
+  top: 383px;
+  letter-spacing: 1px;
 }
 
 .errorWeight {
   color: red;
   position: absolute;
-  right: 420px;
-  top: 438px;
+  right: 364px;
+  top: 421px;
+  letter-spacing: 1px;
 }
