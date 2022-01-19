@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./paginado.module.css";
 
-export default function Paginado({ pokemonsPerPage, allPokemon, paginado, currentPage }) {
+export default function Paginado({ pokemonsPerPage, pokemons, paginado }) {
   const pageNumbers = [];
 
-  for (let i = 0; i < Math.ceil(allPokemon / pokemonsPerPage); i++) {
+  for (let i = 0; i < Math.ceil(pokemons / pokemonsPerPage); i++) {
     pageNumbers.push(i + 1);
   }
 

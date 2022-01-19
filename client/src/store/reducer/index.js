@@ -29,6 +29,7 @@ export default function rootReducer(state = initialState, action) {
     case "POST_POKEMON":
       return {
         ...state,
+        pokemons: action.payload,
       };
 
     case "GET_TYPES":

@@ -31,7 +31,6 @@ function Pokemons() {
   const lastPoke = currentPage * pokemonsPerPage;
   const firstPoke = lastPoke - pokemonsPerPage;
   const currentPoke = pokemons.slice(firstPoke, lastPoke);
-  console.log(currentPoke);
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -59,14 +58,13 @@ function Pokemons() {
     dispatch(orderName(e.target.value));
     setCurrentPage(1);
     setOrder(`order ${e.target.value}`);
-    order();
   }
 
   function handleSortStength(e) {
     e.preventDefault();
     dispatch(orderStrength(e.target.value));
     setCurrentPage(1);
-    setOrder(`order ${e.target.value}`);
+    setOrder(...order, `order ${e.target.value}`);
   }
 
   // -----------------------------------------------------------------------------------------------------------------------------------
