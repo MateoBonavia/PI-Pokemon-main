@@ -87,7 +87,7 @@ const findPokeById = async (id) => {
 
       let pokemon = {
         id: poke.id,
-        image: "",
+        image: poke.image,
         name: poke.name,
         types: poke.types.map((t) => t.name),
         hp: poke.hp,

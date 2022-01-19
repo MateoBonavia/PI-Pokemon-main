@@ -4,7 +4,7 @@ import style from "./Error.module.css";
 function Error() {
   return (
     <div className={style.oopss}>
-      <div className={style.error - text}>
+      <div className={style.error-text}>
         <span>404</span>
         <p>PAGE NOT FOUND</p>
         <p className={style.hmpg}>
