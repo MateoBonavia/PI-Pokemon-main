@@ -32,14 +32,14 @@ describe("Pokemon model", () => {
 
   describe("HP", () => {
     it("Must have a property hp ", async () => {
-      await Pokemon.create({ name: "pikachu", hp: "30" });
+      await Pokemon.create({ name: "pikachu", hp: 30 });
       const poke = await Pokemon.findOne({ where: { name: "pikachu" } });
       expect(poke.dataValues).to.have.own.property("hp");
     });
 
     it("HP must be 30", async () => {
       const poke = await Pokemon.findOne({ where: { name: "pikachu" } });
-      expect(poke.dataValues.HP).to.not.equal("30");
+      expect(poke.dataValues.HP).to.not.equal(30);
     });
   });
 

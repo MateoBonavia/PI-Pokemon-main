@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPokemonById } from "../../store/actions";
+import { getPokemonById, clearDetails } from "../../store/actions";
 import { useEffect } from "react";
 import style from "./card.module.css";
 import NavBar from "../navBar/navBar";
@@ -14,9 +14,11 @@ export default function Card(props) {
     dispatch(getPokemonById(props.match.params.id));
   }, [dispatch, props]);
 
-  const pokemon = useSelector((state) => state.details);
-  console.log(pokemon);
-  console.log(pokemon.types);
+  let pokemon = useSelector((state) => state.details);
+
+  useEffect(() => {
+    dispatch(clearDetails());
+  }, []);
 
   if (pokemon) {
     const pokeDet = () => {

@@ -22,7 +22,7 @@ export default function CreatePokemon() {
     height: "",
     weight: "",
     types: [],
-    image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+    image: "",
   });
 
   const resetState = () => {
@@ -35,7 +35,7 @@ export default function CreatePokemon() {
       height: "",
       weight: "",
       types: [],
-      image: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/865.png",
+      image: "",
     });
   };
 
@@ -236,7 +236,7 @@ export default function CreatePokemon() {
           {!error ? null : <p className={style.errorWeight}>{error.weight}</p>}
         </div>
 
-        {/* <div className={style.inputLabel}>
+        <div className={style.inputLabel}>
           <label className={style.label}>Image:</label>
           <input
             key="image"
@@ -246,7 +246,7 @@ export default function CreatePokemon() {
             onChange={(e) => handleChange(e)}
             className={style.input}
           />
-        </div> */}
+        </div>
 
         <div className={style.selectTypes}>
           <label className={style.selectTypes__text}>Choose the Type</label>

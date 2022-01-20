@@ -7,6 +7,13 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case "CLEAR_DETAILS":
+      console.log("reducer");
+      return {
+        ...state,
+        details: action.payload,
+      };
+
     case "GET_ALL_POKEMONS":
       return {
         ...state,

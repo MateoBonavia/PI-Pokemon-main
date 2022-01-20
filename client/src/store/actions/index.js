@@ -45,23 +45,10 @@ export function getPokemonById(id) {
 }
 
 export function postPokemon(payload) {
-    return async function (dispatch) {
-      const res = await axios.post(
-        "http://localhost:3001/api/pokemon",
-        payload
-      );
-      return res;
-    };
-}
-
-export function getTypes() {
-    return async function (dispatch) {
-      let info = await axios.get("http://localhost:3001/api/type");
-      dispatch({
-        type: "GET_TYPES",
-        payload: info.data,
-      });
-    };
+  return async function (dispatch) {
+    const res = await axios.post("http://localhost:3001/api/pokemon", payload);
+    return res;
+  };
 }
 
 export function filterCreated(payload) {
@@ -90,4 +77,19 @@ export function orderStrength(payload) {
     type: "ORDER_STENGTH",
     payload,
   };
+}
+
+export function getTypes() {
+  return async function (dispatch) {
+    let info = await axios.get("http://localhost:3001/api/type");
+    dispatch({
+      type: "GET_TYPES",
+      payload: info.data,
+    });
+  };
+}
+
+export function clearDetails() {
+  console.log("action");
+  return { type: "CLEAR_DETAILS", payload: {} };
 }
